@@ -23,8 +23,18 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 ### Parte I
 
 1. Integre al proyecto base suministrado los Beans desarrollados en el ejercicio anterior. Sólo copie las clases, NO los archivos de configuración. Rectifique que se tenga correctamente configurado el esquema de inyección de dependencias con las anotaciones @Service y @Autowired.
+	
+	Integramos el proyecto base anteriormente realizado en la parte I, tendriamos la siguiente estructura de nuestra aplicacion
+
+	![Image](https://github.com/user-attachments/assets/20a024e1-8b58-4421-bc8d-99b2852c7775)
+
+	Verificamos que esten las anotaciones @Service y @Autowired
+
+    ![Image](https://github.com/user-attachments/assets/126c8210-34fe-4372-833f-4954a127f969)
 
 2. Modifique el bean de persistecia 'InMemoryBlueprintPersistence' para que por defecto se inicialice con al menos otros tres planos, y con dos asociados a un mismo autor.
+
+
 
 3. Configure su aplicación para que ofrezca el recurso "/blueprints", de manera que cuando se le haga una petición GET, retorne -en formato jSON- el conjunto de todos los planos. Para esto:
 
