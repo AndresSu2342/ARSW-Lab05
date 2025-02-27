@@ -187,7 +187,8 @@ Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que
 
 Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
 
-	Aca el analisis de las condiciones carreras, regiones criticas identificadas y de la solucion aplicada se encuentra a detalle en el archivo ANALISIS_CONCURRENCIA.txt, adjuntaremos solo las partes donde se modificaron codigo en imagen para tener mas claridad en la solucion
+
+	Aca el analisis de las condiciones carreras, regiones criticas identificadas y de la solucion aplicada se encuentra a detalle en el archivo ANALISIS_CONCURRENCIA.txt, 	adjuntaremos solo las partes donde se modificaron codigo en imagen para tener mas claridad en la solucion
 
 	1. Modificamos InMemoryBlueprintPersistence para usar ConcurrentHashMap
 
