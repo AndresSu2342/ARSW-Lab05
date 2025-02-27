@@ -154,25 +154,43 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 
 	Nota: puede basarse en el formato jSON mostrado en el navegador al consultar una orden con el método GET.
 
+ 	Usamos la herramienta sugerida para diseñar el objeto JSON que usaremos para probar nuestra peticion POST.
+ 
 	![Image](https://github.com/user-attachments/assets/a4f84ade-48b4-4141-94dc-6887b0eaf1b0)
+ 
+ 	Usamos el comando documentado ajustando los parametros necesarios, ejecutamos y miramos que nos lanza un mensaje 201 indicando que se agrego el plano correctamente.
 
 	![Image](https://github.com/user-attachments/assets/b4e86059-780d-4dc0-8d23-c0917cfc423c)
 
+	Verificamos que se agrego volviendo a consultar todos los planos y observamos que si se encuentra en la consulta
+ 
 	![Image](https://github.com/user-attachments/assets/1a60d711-9b87-4b9b-a1ba-f033d300b459)
 
 3. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
 
+	Volvemos a consultar, pero no todos los planos si no especificamente el creado.
+
    ![Image](https://github.com/user-attachments/assets/867b8ef5-89a0-48b0-8db9-18d8958b3960)
 
 4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
+	
+	Agregamos el método PUT en el controlador
 
 	![Image](https://github.com/user-attachments/assets/494f69d8-ffd9-4bcd-94d9-78b1eeaac823)
-	
+
+	Siguiendo con la arquitectura, agregamos updateBlueprint() en BlueprintServices
+
 	![Image](https://github.com/user-attachments/assets/59db3dd5-e265-4005-814f-6d1f144702a6)
 	
+	Y por ultimo, implementamos updateBlueprint() en InMemoryBlueprintPersistence
+
 	![Image](https://github.com/user-attachments/assets/e4f29fb2-b24e-44e6-b93a-7ac6f3c67859)
 
+	Probamos el metodo con cURL para ejecutar y verificar su funcionamiento
+
 	![Image](https://github.com/user-attachments/assets/e2101f0c-e91c-4e5e-9e4c-bd9b3d148a2d)
+
+	Consultamos y miramos que nuestro plano si fue modificado correctamente
 
 	![Image](https://github.com/user-attachments/assets/ccf9b54c-90e4-4dab-a3bd-5e72701acb4d)
 

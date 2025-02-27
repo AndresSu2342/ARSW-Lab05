@@ -16,7 +16,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Service layer for managing blueprint operations.
+ * Handles business logic related to blueprint storage and retrieval.
  * @author hcadavid
  */
 @Service
@@ -29,6 +30,11 @@ public class BlueprintsServices {
     @Qualifier("subsamplingFilter")  // Values: "subsamplingFilter" and "redundancyFilter"
     private BlueprintFilter blueprintFilter;
 
+    /**
+     * Adds a new blueprint to the system.
+     * @param blueprint the blueprint to be added
+     * @throws BlueprintPersistenceException if the blueprint already exists
+     */
     public void addNewBlueprint(Blueprint blueprint) throws BlueprintPersistenceException {
         try {
             Blueprint existing = bpp.getBlueprint(blueprint.getAuthor(), blueprint.getName());
@@ -40,7 +46,11 @@ public class BlueprintsServices {
         }
     }
 
-
+    /**
+     * Retrieves all stored blueprints, applying the selected filter.
+     * @return a set of filtered blueprints
+     * @throws BlueprintNotFoundException if no blueprints are found
+     */
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException{
         // return bpp.getAllBlueprints();      retorno sin filtro
         return bpp.getAllBlueprints().stream()
@@ -81,6 +91,13 @@ public class BlueprintsServices {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Updates an existing blueprint.
+     * @param author blueprint's author
+     * @param name blueprint's name
+     * @param updatedBlueprint updated blueprint data
+     * @throws BlueprintNotFoundException if the blueprint does not exist
+     */
     public void updateBlueprint(String author, String name, Blueprint updatedBlueprint) throws BlueprintNotFoundException {
         Blueprint existing = bpp.getBlueprint(author, name);
         if (existing == null) {
@@ -89,5 +106,5 @@ public class BlueprintsServices {
         bpp.updateBlueprint(author, name, updatedBlueprint);
     }
 
-    
+
 }

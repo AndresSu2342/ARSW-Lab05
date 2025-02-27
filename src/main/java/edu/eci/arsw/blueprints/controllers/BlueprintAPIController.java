@@ -20,7 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *
+ * REST controller for managing blueprints.
+ * Provides endpoints to retrieve, create, and update blueprints.
  * @author hcadavid
  */
 @RestController
@@ -30,6 +31,10 @@ public class BlueprintAPIController {
     @Autowired
     private BlueprintsServices blueprintsServices;
 
+    /**
+     * Retrieves all available blueprints.
+     * @return a ResponseEntity containing the list of blueprints or an error message.
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> GetAllBlueprints(){
         try {
@@ -40,6 +45,12 @@ public class BlueprintAPIController {
             return new ResponseEntity<>("Error al obtener los planos", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Retrieves all blueprints created by a specific author.
+     * @param author the author's name
+     * @return a ResponseEntity containing the list of blueprints or an error message.
+     */
 
     @RequestMapping(value = "/{author}", method = RequestMethod.GET)
     public ResponseEntity<?> getBlueprintsByAuthor(@PathVariable String author) {
@@ -53,6 +64,12 @@ public class BlueprintAPIController {
         }
     }
 
+    /**
+     * Retrieves a specific blueprint by author and name.
+     * @param author the author's name
+     * @param bpname the blueprint's name
+     * @return a ResponseEntity containing the blueprint or an error message.
+     */
     @RequestMapping(value = "/{author}/{bpname}", method = RequestMethod.GET)
     public ResponseEntity<?> getBlueprintByAuthorAndName(@PathVariable String author, @PathVariable String bpname) {
         try {
@@ -65,6 +82,11 @@ public class BlueprintAPIController {
         }
     }
 
+    /**
+     * Adds a new blueprint.
+     * @param blueprint the blueprint to be added
+     * @return a ResponseEntity with the status of the operation.
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addBlueprint(@RequestBody Blueprint blueprint) {
         try {
@@ -77,6 +99,13 @@ public class BlueprintAPIController {
         }
     }
 
+    /**
+     * Updates an existing blueprint.
+     * @param author the author's name
+     * @param bpname the blueprint's name
+     * @param blueprint the updated blueprint data
+     * @return a ResponseEntity with the status of the update operation.
+     */
     @RequestMapping(value = "/{author}/{bpname}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateBlueprint(@PathVariable("author") String author, @PathVariable("bpname") String bpname, @RequestBody Blueprint blueprint) {
         try {

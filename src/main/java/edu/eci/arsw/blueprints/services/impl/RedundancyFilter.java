@@ -7,9 +7,18 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A filter that removes consecutive duplicate points from a blueprint.
+ */
 @Component
 public class RedundancyFilter implements BlueprintFilter {
 
+    /**
+     * Filters a blueprint by removing consecutive duplicate points.
+     *
+     * @param blueprint The blueprint to be filtered.
+     * @return A new blueprint with redundant points removed.
+     */
     @Override
     public Blueprint filter(Blueprint blueprint) {
         List<Point> points = blueprint.getPoints();
