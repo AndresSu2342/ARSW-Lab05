@@ -185,14 +185,14 @@ El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir,
 
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 
-Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
+Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt.
 
-	Aca el analisis de las condiciones carreras, regiones criticas identificadas y de la solucion aplicada se encuentra a detalle en el archivo ANALISIS_CONCURRENCIA.txt, adjuntaremos solo las partes donde se modificaron codigo en imagen para tener mas claridad en la solucion
+Aca el analisis de las condiciones carreras, regiones criticas identificadas y de la solucion aplicada se encuentra a detalle en el archivo ANALISIS_CONCURRENCIA.txt, adjuntaremos solo las partes donde se modificaron codigo en imagen para tener mas claridad en la solucion
 
-	1. Modificamos InMemoryBlueprintPersistence para usar ConcurrentHashMap
+1. Modificamos InMemoryBlueprintPersistence para usar ConcurrentHashMap
 
-	![Image](https://github.com/user-attachments/assets/9a619813-9988-45aa-9ca8-ef19b5bec0d2)
+![Image](https://github.com/user-attachments/assets/9a619813-9988-45aa-9ca8-ef19b5bec0d2)
 
-	2. Uso del putIfAbsent() en ConcurrentHashMap dentro de la condicion del plano existente
+2. Uso del putIfAbsent() en ConcurrentHashMap dentro de la condicion del plano existente
 
-	![Image](https://github.com/user-attachments/assets/044d0469-817b-4aa7-aa5f-6d8bfcaafb46)
+![Image](https://github.com/user-attachments/assets/044d0469-817b-4aa7-aa5f-6d8bfcaafb46)
