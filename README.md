@@ -34,7 +34,7 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 
 2. Modifique el bean de persistecia 'InMemoryBlueprintPersistence' para que por defecto se inicialice con al menos otros tres planos, y con dos asociados a un mismo autor.
 
-
+![Image](https://github.com/user-attachments/assets/c41c3820-a1e9-4d3f-9c65-5cc1c65789ff)
 
 3. Configure su aplicación para que ofrezca el recurso "/blueprints", de manera que cuando se le haga una petición GET, retorne -en formato jSON- el conjunto de todos los planos. Para esto:
 
@@ -60,6 +60,10 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	```
 	* Haga que en esta misma clase se inyecte el bean de tipo BlueprintServices (al cual, a su vez, se le inyectarán sus dependencias de persisntecia y de filtrado de puntos).
 
+Basandonos en lo indicado por el ejercicio, finalmente tenemos que nuestra clase `BlueprintAPIController` queda de la siguiente manera:
+
+![Image](https://github.com/user-attachments/assets/59649a3d-ee79-4c15-bf3c-a05276146518)
+
 4. Verifique el funcionamiento de a aplicación lanzando la aplicación con maven:
 
 	```bash
@@ -67,14 +71,44 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	$ mvn spring-boot:run
 	
 	```
-	Y luego enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
+ 
+Al usar estos comandos estabamos teniendo errores debido a las dependecias que manejabamos, ya que version de `Spring Boot` era incompantible con la version de `Java` que estabamos manejando. Finalmente nuestras dependencias quedaron de la siguiente manera:
 
+![Image](https://github.com/user-attachments/assets/e4d8ffac-18bc-47ab-ac00-b55071e3cf26)
+
+- Y luego enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
+
+Efectivamente al consultar `http://localhost:8080/blueprints` obtenemos el siguiente jSON:
+
+![Image](https://github.com/user-attachments/assets/bd889dc1-14e4-4ac6-81cd-b9b0ee9b0fda)
 
 5. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}, el cual retorne usando una representación jSON todos los planos realizados por el autor cuyo nombre sea {author}. Si no existe dicho autor, se debe responder con el código de error HTTP 404. Para esto, revise en [la documentación de Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html), sección 22.3.2, el uso de @PathVariable. De nuevo, verifique que al hacer una petición GET -por ejemplo- a recurso http://localhost:8080/blueprints/juan, se obtenga en formato jSON el conjunto de planos asociados al autor 'juan' (ajuste esto a los nombres de autor usados en el punto 2).
 
+Agregamos el endpoint para obtener blueprints por autor:
+
+![Image](https://github.com/user-attachments/assets/1400a90d-0131-4b87-aad6-3fda1e2a4167)
+
+Al consultar un autor que existe, obtenemos la siguiente respuesta:
+
+![Image](https://github.com/user-attachments/assets/7d1b2ab8-aa6d-41f0-8acf-d590e1153502)
+
+Mientras que si consultamos un autor que no existe, obtenemos:
+
+![Image](https://github.com/user-attachments/assets/80c4f9e7-9f76-49d5-84dc-c89f7c0b9b76)
+
 6. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}/{bpname}, el cual retorne usando una representación jSON sólo UN plano, en este caso el realizado por {author} y cuyo nombre sea {bpname}. De nuevo, si no existe dicho autor, se debe responder con el código de error HTTP 404. 
 
+Agregamos el endpoint para obtener el plano de un autor existente:
 
+![Image](https://github.com/user-attachments/assets/f019c176-0b18-49bf-ba91-5670b472d681)
+
+En caso de consultar un Autor y Plano que si existen, obtenemos la siguiente respuesta:
+
+![Image](https://github.com/user-attachments/assets/cb7c8922-b194-487d-9c09-3ac43727a22c)
+
+En caso de consultar un Autor que existe pero con un Plano que no tiene asociado, obtenemos:
+
+![Image](https://github.com/user-attachments/assets/b9453954-65f4-4aef-bd34-676fa6f2ab5b)
 
 ### Parte II
 
