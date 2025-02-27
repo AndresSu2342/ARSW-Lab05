@@ -171,9 +171,9 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	![Image](https://github.com/user-attachments/assets/59db3dd5-e265-4005-814f-6d1f144702a6)
 	
 	![Image](https://github.com/user-attachments/assets/e4f29fb2-b24e-44e6-b93a-7ac6f3c67859)
-	
-	![Image](https://github.com/user-attachments/assets/d7f491fc-27d5-4f32-bc59-085e6329ba26)
-	
+
+	![Image](https://github.com/user-attachments/assets/e2101f0c-e91c-4e5e-9e4c-bd9b3d148a2d)
+
 	![Image](https://github.com/user-attachments/assets/ccf9b54c-90e4-4dab-a3bd-5e72701acb4d)
 
 ### Parte III
@@ -186,3 +186,13 @@ El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir,
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 
 Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
+
+	Aca el analisis de las condiciones carreras, regiones criticas identificadas y de la solucion aplicada se encuentra a detalle en el archivo ANALISIS_CONCURRENCIA.txt, adjuntaremos solo las partes donde se modificaron codigo en imagen para tener mas claridad en la solucion
+
+	1. Modificamos InMemoryBlueprintPersistence para usar ConcurrentHashMap
+
+	![Image](https://github.com/user-attachments/assets/9a619813-9988-45aa-9ca8-ef19b5bec0d2)
+
+	2. Uso del putIfAbsent() en ConcurrentHashMap dentro de la condicion del plano existente
+
+	![Image](https://github.com/user-attachments/assets/044d0469-817b-4aa7-aa5f-6d8bfcaafb46)
