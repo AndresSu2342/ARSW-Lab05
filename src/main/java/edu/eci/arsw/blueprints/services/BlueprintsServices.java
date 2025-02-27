@@ -81,4 +81,11 @@ public class BlueprintsServices {
                 .collect(Collectors.toSet());
     }
 
+    public void updateBlueprint(String author, String name, Blueprint updatedBlueprint) throws BlueprintNotFoundException {
+        Blueprint existing = bpp.getBlueprint(author, name);
+        if (existing == null) {
+            throw new BlueprintNotFoundException("El plano no existe: " + name);
+        }
+        bpp.updateBlueprint(author, name, updatedBlueprint);
+    }
 }

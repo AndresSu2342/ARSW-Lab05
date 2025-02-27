@@ -31,7 +31,7 @@ public class BlueprintAPIController {
     private BlueprintsServices blueprintsServices;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> manejadorGetRecursoXX(){
+    public ResponseEntity<?> GetAllBlueprints(){
         try {
             Set<Blueprint> response = blueprintsServices.getAllBlueprints();
             return new ResponseEntity<>(response,HttpStatus.OK);
@@ -77,6 +77,17 @@ public class BlueprintAPIController {
         }
     }
 
+    @RequestMapping(value = "/{author}/{bpname}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateBlueprint(@PathVariable("author") String author, @PathVariable("bpname") String bpname, @RequestBody Blueprint blueprint) {
+        try {
+            blueprintsServices.updateBlueprint(author, bpname, blueprint);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (BlueprintNotFoundException e) {
+            return new ResponseEntity<>("El plano no existe", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al actualizar el plano", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
 

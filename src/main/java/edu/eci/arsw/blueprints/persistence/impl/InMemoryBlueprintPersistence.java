@@ -52,12 +52,17 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         }
         else{
             blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+            System.out.println("Plano guardado correctamente.");
         }        
     }
 
     @Override
-    public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
-        return blueprints.get(new Tuple<>(author, bprintname));
+    public Blueprint getBlueprint(String author, String name) throws BlueprintNotFoundException {
+        Blueprint bp = blueprints.get(new Tuple<>(author, name));
+        if (bp == null) {
+            throw new BlueprintNotFoundException("No existe el plano: " + name);
+        }
+        return bp;
     }
 
     @Override
@@ -75,6 +80,18 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     @Override
     public Set<Blueprint> getAllBlueprints() {
         return new HashSet<>(blueprints.values());
+    }
+
+    @Override
+    public void updateBlueprint(String author, String name, Blueprint updatedBlueprint) throws BlueprintNotFoundException {
+        Tuple<String, String> key = new Tuple<>(author, name);
+
+        if (!blueprints.containsKey(key)) {
+            throw new BlueprintNotFoundException("El plano no existe: " + name);
+        }
+
+        blueprints.put(key, updatedBlueprint);
+        System.out.println("Plano actualizado: " + name + " de " + author);
     }
 
 }
