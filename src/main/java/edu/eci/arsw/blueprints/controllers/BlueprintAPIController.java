@@ -12,14 +12,12 @@ import java.util.logging.Logger;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -66,6 +64,19 @@ public class BlueprintAPIController {
             return new ResponseEntity<>("Error al obtener el plano", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> addBlueprint(@RequestBody Blueprint blueprint) {
+        try {
+            blueprintsServices.addNewBlueprint(blueprint);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (BlueprintPersistenceException e) {
+            return new ResponseEntity<>("El plano ya existe o no se pudo registrar", HttpStatus.FORBIDDEN);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al registrar el plano", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
 

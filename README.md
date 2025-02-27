@@ -128,6 +128,13 @@ En caso de consultar un Autor que existe pero con un Plano que no tiene asociado
 	}
 	```	
 
+Agregamos el método POST en el controlador para que nos permita recibir un Blueprint en formato jSON:
+
+![Image](https://github.com/user-attachments/assets/d01e16d3-680c-4560-a259-a5f253f31408)
+
+Para que funcione, tuvimos que modificar el método `addNewBlueprint` en la clase en que manejamos los servicios. Finalmente el método quedo de la siguiente manera:
+
+![Image](https://github.com/user-attachments/assets/621adba8-c364-40d7-9c0b-396048cfbb70)
 
 2.  Para probar que el recurso ‘planos’ acepta e interpreta
     correctamente las peticiones POST, use el comando curl de Unix. Este

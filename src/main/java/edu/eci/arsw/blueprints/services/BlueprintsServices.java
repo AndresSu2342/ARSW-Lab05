@@ -28,11 +28,19 @@ public class BlueprintsServices {
     @Autowired
     @Qualifier("subsamplingFilter")  // Values: "subsamplingFilter" and "redundancyFilter"
     private BlueprintFilter blueprintFilter;
-    
-    public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
-        bpp.saveBlueprint(bp);
+
+    public void addNewBlueprint(Blueprint blueprint) throws BlueprintPersistenceException {
+        try {
+            Blueprint existing = bpp.getBlueprint(blueprint.getAuthor(), blueprint.getName());
+            if (existing != null) {
+                throw new BlueprintPersistenceException("El plano ya existe: " + blueprint.getName());
+            }
+        } catch (BlueprintNotFoundException e) {
+            bpp.saveBlueprint(blueprint);
+        }
     }
-    
+
+
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException{
         // return bpp.getAllBlueprints();      retorno sin filtro
         return bpp.getAllBlueprints().stream()
@@ -72,5 +80,5 @@ public class BlueprintsServices {
                 .map(blueprintFilter::filter)
                 .collect(Collectors.toSet());
     }
-    
+
 }
