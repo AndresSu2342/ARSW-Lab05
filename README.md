@@ -2,7 +2,11 @@
 
 ### Arquitecturas de Software
 
+---
 
+### Integrantes: Joan S. Acevedo Aguilar - Cesar A. Borray Suarez
+
+---
 
 #### API REST para la gestión de planos.
 
